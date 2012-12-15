@@ -1,6 +1,8 @@
 .tactics-field {
     width: 500px;
     height: 375px;
+    float: left;
+
     border: 2px solid black;
     background: #32cd32 url("../img/field.jpg");
 }
@@ -52,5 +54,5 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-    cursor: default;
+    cursor: pointer;
 }
