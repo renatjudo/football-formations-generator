@@ -9,10 +9,31 @@
     background: url("../img/tshirt.png") no-repeat;
     width: 48px;
     height: 64px;
-    padding-top: 48px;
-    box-sizing: border-box;
+}
+
+.tactics-field-player-number {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: smaller;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px #333333;
+    padding-top: 16px;
+
+    height: 42px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
 }
 
 .tactics-field-player-name {
@@ -30,4 +51,11 @@
     font-size: small;
     color: white;
     text-shadow: 1px 1px 1px #333333;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
 }
