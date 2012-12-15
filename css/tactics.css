@@ -1,13 +1,33 @@
 .tactics-field {
     width: 500px;
     height: 375px;
-    background-color: #32cd32;
     border: 2px solid black;
-	background-image: url("../img/field.jpg");
+    background: #32cd32 url("../img/field.jpg");
 }
 
 .tactics-field-player {
-    background: url("../img/tshirt.png") center;
+    background: url("../img/tshirt.png") no-repeat;
     width: 48px;
-    height: 48px;
+    height: 64px;
+    padding-top: 48px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.tactics-field-player-name {
+    left: -40px;
+    position: relative;
+    display: block;
+
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 128px;
+
+    font-family: Tahoma, sans-serif;
+    font-size: small;
+    color: white;
+    text-shadow: 1px 1px 1px #333333;
 }
