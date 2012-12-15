@@ -1,8 +1,9 @@
 .tactics-field {
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 375px;
     background-color: #32cd32;
     border: 2px solid black;
+	background-image: url("../img/field.jpg");
 }
 
 .tactics-field-player {
