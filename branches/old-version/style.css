@@ -1,0 +1,131 @@
+	* {
+		border: none;
+	}
+	body {
+	padding:0px;
+	margin:0px;
+	background-color:#DDDDDD;
+	}
+	div#parent {
+		width: 500px;
+		height:375px;
+		margin: auto;
+		position:absolute;
+	}
+	#players{
+		margin:auto;
+		width:500px;
+		position:relative;
+		top:-40px;
+	}
+	div.positionable {
+		height: 35px;
+		background-image:url('drawplayer.php?c1=ff0000&c2=00ff00');
+		background-position:50%;
+		background-repeat:no-repeat;
+		cursor:pointer;
+		float:left;
+		position:absolute;
+		text-align: center;
+	}
+	
+	div#player1{
+		height: 35px;
+		background-image:url('goalie.png');
+		background-position:50%;
+		background-repeat:no-repeat;
+		cursor:pointer;
+		float:left;
+		position:absolute;
+		text-align: center;
+	}
+	div#player1 div.goalienumber {
+	position:relative;
+	top:8px;
+	height:15px;
+	color: #000000;
+	font-size:14px;
+	font-weight:bold;
+	}
+	
+	div#player1 div.name {
+	position:relative;
+	top:20px;
+	color: #ffffff;
+	}	
+	div.positionable div.name {
+	position:relative;
+	top:20px;
+	color: #ffffff;
+	}
+	div.positionable div.number {
+	position:relative;
+	top:8px;
+	height:15px;
+	color: #00ff00;
+	font-size:14px;
+	font-weight:bold;
+	}
+	div#field{
+		float:left;
+		padding-right:15px;
+		width:500px;
+		height:375px;
+	}
+	.ui-autocomplete {
+		max-height: 200px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 20px;
+
+	}
+	.ui-menu .ui-menu-item a	{
+			line-height:27px;
+	}
+	label {
+        float: left;
+        text-align: right;
+        margin-right: 15px;
+        width: 210px;
+	}
+
+	input.inputNumber{
+	text-align:center;
+	width:10px;
+	}
+	input {
+		border: 1px solid #999999;
+		width:250px;
+		background-color:#DDDDDD;
+	}
+	.icon{
+	float:left;
+	}
+	.icon img{
+	width:45px;
+	}
+	table#wrapper{
+	margin:auto;
+	}
+	table#wrapper tr.formcolor input{
+	width:50px;
+	text-align:center;
+	}
+	table#wrapper tr.header td{
+	text-align:center;
+	}
+	textarea{
+	width:500px;
+	background-color:#DDDDDD;
+	height:60px;
+	font-size:12px;
+	}
+	p{
+	font-size:12px;
+	}
+	p.warning{
+	color:#ff0000;
+	font-size:12px;
+	}
