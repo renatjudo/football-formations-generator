@@ -27,13 +27,6 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    cursor: default;
 }
 
 .tactics-field-player-name {
@@ -51,7 +44,9 @@
     font-size: small;
     color: white;
     text-shadow: 1px 1px 1px #333333;
+}
 
+.tactics-nonselectable {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
