@@ -46,7 +46,7 @@
     text-shadow: 1px 1px 1px #333333;
 }
 
-.tactics-nonselectable {
+.tactics-field-player-name, .tactics-field-player-number {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
