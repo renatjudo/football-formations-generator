@@ -11,7 +11,7 @@
             if (counter > 11)
                 return;
 
-            createPlayer(240, 160, counter, '');
+            createPlayer(237, 169, counter, '');
         });
 
         //TODO: убрать после отладки
@@ -58,7 +58,7 @@
             draggable({
                 containment: "parent",
                 cursor: "pointer",
-                grid: [24, 24],
+                grid: [24, 32],
                 scroll: false
             });
 
