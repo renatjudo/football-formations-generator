@@ -7,6 +7,7 @@
     };
 
     var init = function () {
+		$('#grid-on-off').attr("checked","checked");
         $('#add-player').button().click(function () {
             if (counter > 11)
                 return;
@@ -18,6 +19,26 @@
         $('#debug-show-data').button().click(function () {
             $('#debug-data').html(JSON.stringify(model));
         });
+		
+		$('#grid-on-off').click(function () {
+               if ($('#grid-on-off').attr("checked")=="checked") {
+			   $(".tactics-field-player").draggable({
+			    containment: "parent",
+                cursor: "pointer",
+                grid: [24, 32],
+                scroll: false
+			   });
+			   }
+			   else {
+			   $(".tactics-field-player").draggable({
+			   	containment: "parent",
+                cursor: "pointer",
+                grid: [1, 1],
+                scroll: false
+			   });
+			   }
+			   
+            });
     };
 
     var createPlayer = function (x, y, number, name) {
@@ -47,7 +68,14 @@
             'numberDiv': null,
             'nameDiv': null
         };
-
+		if ($('#grid-on-off').attr("checked")=="checked"){
+		var gridX=24;
+		var gridY=32;
+		}
+		else{
+		gridX=1;
+		gridY=1;
+		}
         var playerDiv = $('<div class="tactics-field-player" id="player' + number + '"></div>').
             appendTo($('.tactics-field')).
             css({
@@ -58,7 +86,7 @@
             draggable({
                 containment: "parent",
                 cursor: "pointer",
-                grid: [24, 32],
+                grid: [gridX, gridY],
                 scroll: false
             });
 
