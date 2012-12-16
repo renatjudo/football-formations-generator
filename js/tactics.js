@@ -43,7 +43,7 @@
 	var createTextField = function(number) {
 
         var textAreaDiv = $('<div class="text-fields" id="'+number+'"></div>').appendTo($('.text-area'));
-        textAreaDiv.append('<input type="text" id="number-for-player-'+number+'" class="text-number" maxlength=2 value="'+number+'" onChange="textChange('+number+')"/>');
+        textAreaDiv.append('<input type="text" id="number-for-player-'+number+'" class="text-number" maxlength="2" value="'+number+'" onChange="textChange('+number+')"/>');
         textAreaDiv.append('<input type="text" id="lastname-for-player-'+number+'" class="text-lastname" value="" onChange="textChange('+number+')"/>');
 		
     };

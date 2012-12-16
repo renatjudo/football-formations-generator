@@ -32,6 +32,9 @@ $alfabet= array("a","b","c","d","e","f","g","h","i","j");
     </div>
     -->
 </div>
+<input type="button" id="add-player" value="Добавить игрока" />
+<div class="text-area">
+</div>
 
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
