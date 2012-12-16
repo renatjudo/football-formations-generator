@@ -22,22 +22,14 @@
 		
 		$('#grid-on-off').click(function () {
                if ($('#grid-on-off').attr("checked")=="checked") {
-			   $(".tactics-field-player").draggable({
-			    containment: "parent",
-                cursor: "pointer",
-                grid: [24, 32],
-                scroll: false
-			   });
+			   var gridX=24;
+			   var gridY=32;
 			   }
-			   else {
-			   $(".tactics-field-player").draggable({
-			   	containment: "parent",
-                cursor: "pointer",
-                grid: [1, 1],
-                scroll: false
-			   });
-			   }
-			   
+			   else{
+			   var gridX=1;
+			   var gridY=1;
+			  }
+				playerDraggable(gridX, gridY);
             });
     };
 
@@ -82,15 +74,10 @@
                 'position': 'absolute',
                 'left': x,
                 'top': y
-            }).
-            draggable({
-                containment: "parent",
-                cursor: "pointer",
-                grid: [gridX, gridY],
-                scroll: false
             });
+		playerDraggable(gridX,gridY);
 
-        //TODO: в dragStop добавить изменение местоположения игрока
+        
 
         fieldView.numberDiv = $('<div class="tactics-field-player-number">' + number + '</div>').appendTo(playerDiv);
         fieldView.nameDiv = $('<div class="tactics-field-player-name">' + name + '</div>').appendTo(playerDiv);
@@ -118,6 +105,16 @@
             });
     };
 
+	var playerDraggable = function (gridX, gridY){
+		 $(".tactics-field-player").draggable({
+			    containment: "parent",
+                cursor: "pointer",
+                grid: [gridX, gridY],
+                scroll: false
+			   });
+			   //TODO: в dragStop добавить изменение местоположения игрока
+	}
+	
     $(document).ready(init);
 
 })(jQuery);
