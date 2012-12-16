@@ -4,7 +4,7 @@
     float: left;
     border: 2px solid black;
     background: #32cd32 url("../img/field.jpg");
-	
+
 }
 
 .tactics-field-player {
@@ -56,20 +56,24 @@
     user-select: none;
     cursor: pointer;
 }
-#grid{
-position:relative; 
-top:27px; 
-left:34px; 
-width:432px;
-height:332px;
+
+#grid {
+    position: relative;
+    top: 27px;
+    left: 34px;
+    width: 432px;
+    height: 332px;
 }
-.cell
-{
-float:left;
-width:24px;
-height:32px;
-cursor:default;
+
+.cell {
+    float: left;
+    width: 24px;
+    height: 32px;
+    cursor: default;
+    border: 1px solid #006400;
+    -moz-box-sizing: border-box;
 }
-.text-number{
-width:20px;
+
+.text-number {
+    width: 20px;
 }

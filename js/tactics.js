@@ -1,66 +1,95 @@
 (function ($) {
 
-    var playerDragOptions = {
-        containment: "parent",
-        cursor: "pointer",
-        grid: [24, 24],
-        scroll: false
+    var counter = 1;
+
+    var model = {
+        players: []
     };
-	
-	var counter=1;
-	$('#add-player').click(function() {
-		if (counter>11) {
-			exit();
-		}
-		createPlayer(240, 160, counter, '');
-		createTextField(counter);
-		counter=counter+1;
-	});
-	
-    var init = function() {
-        $('.tactics-field-player').draggable(playerDragOptions);
 
-/*
-        createPlayer(240, 160, 23, 'Аршавин');
-        createPlayer(58, 60, 8, 'Самир Насри');
-        createPlayer(58, 160, 29, 'Халк');
-        createPlayer(58, 260, 9, 'Роналдо Луис Назарио де Лима');
-*/    };
+    var init = function () {
+        $('#add-player').button().click(function () {
+            if (counter > 11)
+                return;
 
-    var createPlayer = function(x, y, number, name) {
-
-        var playerDiv = $('<div class="tactics-field-player" id="player'+number+'"></div>').appendTo($('.tactics-field'));
-        playerDiv.append('<div class="tactics-field-player-number">' + number +  '</div>');
-        playerDiv.append('<div class="tactics-field-player-name">' + name + '</div>');
-        playerDiv.css({
-            'position': 'absolute',
-            'left':x,
-            'top': y
+            createPlayer(240, 160, counter, '');
         });
-		playerDiv.draggable(playerDragOptions);
-	};	
-	
-	var createTextField = function(number) {
 
-        var textAreaDiv = $('<div class="text-fields" id="'+number+'"></div>').appendTo($('.text-area'));
-        textAreaDiv.append('<input type="text" id="number-for-player-'+number+'" class="text-number" maxlength="2" value="'+number+'" onChange="textChange('+number+')"/>');
-        textAreaDiv.append('<input type="text" id="lastname-for-player-'+number+'" class="text-lastname" value="" onChange="textChange('+number+')"/>');
-		
+        //TODO: убрать после отладки
+        $('#debug-show-data').button().click(function () {
+            $('#debug-data').html(JSON.stringify(model));
+        });
     };
-	
 
-	$(".text-number").live('keyup', function() {
-         id=this.parentNode.id;
-		 var str=$(this).val();
-		 $("#player"+id+" > .tactics-field-player-number").text(str);
-	});
-		$(".text-lastname").live('keyup', function() {
-         id=this.parentNode.id;
-		 var str=$(this).val();
-		 $("#player"+id+" > .tactics-field-player-name").text(str);
-	});
+    var createPlayer = function (x, y, number, name) {
 
-			
+        // Player ViewModel
+        var playerVM = {
+            'player': {
+                'name': name,
+                'number': number,
+                'x': x,
+                'y': y
+            },
+            'fieldView': null
+        };
+
+        model.players.push(playerVM.player);
+
+        createPlayerFieldView(playerVM, x, y, number, name);
+
+        createTextField(counter, playerVM);
+        counter++;
+    };
+
+    var createPlayerFieldView = function (playerVM, x, y, number, name) {
+
+        var fieldView = {
+            'numberDiv': null,
+            'nameDiv': null
+        };
+
+        var playerDiv = $('<div class="tactics-field-player" id="player' + number + '"></div>').
+            appendTo($('.tactics-field')).
+            css({
+                'position': 'absolute',
+                'left': x,
+                'top': y
+            }).
+            draggable({
+                containment: "parent",
+                cursor: "pointer",
+                grid: [24, 24],
+                scroll: false
+            });
+
+        //TODO: в dragStop добавить изменение местоположения игрока
+
+        fieldView.numberDiv = $('<div class="tactics-field-player-number">' + number + '</div>').appendTo(playerDiv);
+        fieldView.nameDiv = $('<div class="tactics-field-player-name">' + name + '</div>').appendTo(playerDiv);
+
+        playerVM.fieldView = fieldView;
+    }
+
+    var createTextField = function (number, playerVM) {
+
+        var textAreaDiv = $('<div class="text-fields" id="' + number + '"></div>').appendTo($('.tactics-player-list'));
+        $('<input type="text" id="number-for-player-' + number + '" class="text-number" maxlength="2" value="' + number + '" />').
+            appendTo(textAreaDiv).
+            on('keyup', function () {
+                var value = $(this).val();
+                //TODO: преобразовать в число
+                playerVM.player.number = value;
+                $(playerVM.fieldView.numberDiv).text(value);
+            });
+        $('<input type="text" id="lastname-for-player-' + number + '" class="text-lastname" value=""/>').
+            appendTo(textAreaDiv).
+            on('keyup', function () {
+                var value = $(this).val();
+                playerVM.player.name = value;
+                $(playerVM.fieldView.nameDiv).text(value);
+            });
+    };
+
     $(document).ready(init);
 
 })(jQuery);

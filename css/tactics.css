@@ -57,5 +57,18 @@
     cursor: pointer;
 }
 .text-number{
-width:20px;
+    width:20px;
+}
+
+.tactics-player-list {
+    margin-left: 20px;
+    float: left;
+}
+
+.tactics-player-list input {
+    margin: 2px 0px;
+}
+
+.tactics-button {
+    font-size: small;
 }
