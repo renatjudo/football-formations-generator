@@ -1,0 +1,72 @@
+.tactics-field {
+    width: 500px;
+    height: 375px;
+    float: left;
+    border: 2px solid black;
+    background: #32cd32 url("../img/field.jpg");
+	
+}
+
+.tactics-field-player {
+    background: url("../img/tshirt.png") no-repeat;
+    width: 48px;
+    height: 64px;
+}
+
+.tactics-field-player-number {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: smaller;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px #333333;
+    padding-top: 16px;
+
+    height: 42px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.tactics-field-player-name {
+    left: -40px;
+    position: relative;
+    display: block;
+
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 128px;
+
+    font-family: Tahoma, sans-serif;
+    font-size: small;
+    color: white;
+    text-shadow: 1px 1px 1px #333333;
+}
+
+.tactics-field-player-name, .tactics-field-player-number {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+#grid{
+position:relative; 
+top:27px; 
+left:34px; 
+width:432px;
+height:332px;
+}
+.cell
+{
+float:left;
+width:24px;
+height:32px;
+cursor:default;
+}
