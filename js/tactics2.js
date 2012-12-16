@@ -11,7 +11,7 @@
 		$('.cell').css({'background': 'url("../img/half-transparent.png") 0% 0% no-repeat'});
 		},
 		stop: function() {
-		//$('.cell').css({'background-image': 'none'});
+		$('.cell').css({'background-image': 'none'});
 		}
     };
 
