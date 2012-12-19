@@ -31,7 +31,17 @@
             grid: [gridXY[0], gridXY[1]],
 			});
         });
-    };
+		/*
+	  	$('.text-fields').on('keydown', '.text-number', function () {
+		alert("ПАНИКА!");
+		});
+		*/
+		/*
+		$('.text-number').live('keydown',  function () {
+		alert("ПАНИКА!");
+		});
+		*/		
+	};
 
     var createPlayer = function (x, y, gridXY, number, name) {
 
@@ -93,7 +103,7 @@
         $('<input type="text" id="number-for-player-' + number + '" class="text-number" maxlength="2" value="' + number + '" />').
             appendTo(textAreaDiv).
             on('keyup', function () {
-                var value = $(this).val();
+                var value = parseInt($(this).val());
                 //TODO: преобразовать в число
                 playerVM.player.number = value;
                 $(playerVM.fieldView.numberDiv).text(value);
