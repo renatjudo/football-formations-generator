@@ -1,18 +1,23 @@
 (function ($) {
 
+	var gridXY = new Array (24,32);
     var counter = 1;
-
     var model = {
         players: []
     };
+	var team = {
+        playersVM: []
+    };
 
+	
+	
     var init = function () {
 		$('#grid-on-off').attr("checked","checked");
         $('#add-player').button().click(function () {
             if (counter > 11)
                 return;
-
-            createPlayer(237, 169, counter, '');
+			
+            createPlayer(237, 169, gridXY, counter, '');
         });
 
         //TODO: убрать после отладки
@@ -21,19 +26,14 @@
         });
 		
 		$('#grid-on-off').click(function () {
-               if ($('#grid-on-off').attr("checked")=="checked") {
-			   var gridX=24;
-			   var gridY=32;
-			   }
-			   else{
-			   var gridX=1;
-			   var gridY=1;
-			  }
-				playerDraggable(gridX, gridY);
-            });
+			gridXY=getGrid();
+			$(".tactics-field-player").draggable({
+            grid: [gridXY[0], gridXY[1]],
+			});
+        });
     };
 
-    var createPlayer = function (x, y, number, name) {
+    var createPlayer = function (x, y, gridXY, number, name) {
 
         // Player ViewModel
         var playerVM = {
@@ -48,41 +48,43 @@
 
         model.players.push(playerVM.player);
 
-        createPlayerFieldView(playerVM, x, y, number, name);
+        createPlayerFieldView(playerVM, x, y, gridXY, number, name);
 
         createTextField(counter, playerVM);
         counter++;
     };
 
-    var createPlayerFieldView = function (playerVM, x, y, number, name) {
+    var createPlayerFieldView = function (playerVM, x, y, gridXY, number, name) {
 
         var fieldView = {
             'numberDiv': null,
             'nameDiv': null
         };
-		if ($('#grid-on-off').attr("checked")=="checked"){
-		var gridX=24;
-		var gridY=32;
-		}
-		else{
-		gridX=1;
-		gridY=1;
-		}
-        var playerDiv = $('<div class="tactics-field-player" id="player' + number + '"></div>').
+		gridXY=getGrid();
+		var playerDiv = $('<div class="tactics-field-player" id="player' + number + '"></div>').
             appendTo($('.tactics-field')).
             css({
                 'position': 'absolute',
                 'left': x,
                 'top': y
+            }).
+            draggable({
+                containment: "parent",
+                cursor: "pointer",
+                grid: [gridXY[0], gridXY[1]],
+                scroll: false,
+				stop: function (){
+				playerVM.player.x=$(this).css('left');
+				playerVM.player.y=$(this).css('top');
+				}
             });
-		playerDraggable(gridX,gridY);
-
-        
 
         fieldView.numberDiv = $('<div class="tactics-field-player-number">' + number + '</div>').appendTo(playerDiv);
         fieldView.nameDiv = $('<div class="tactics-field-player-name">' + name + '</div>').appendTo(playerDiv);
 
         playerVM.fieldView = fieldView;
+		team.playersVM.push(playerVM);
+		
     }
 
     var createTextField = function (number, playerVM) {
@@ -105,14 +107,14 @@
             });
     };
 
-	var playerDraggable = function (gridX, gridY){
-		 $(".tactics-field-player").draggable({
-			    containment: "parent",
-                cursor: "pointer",
-                grid: [gridX, gridY],
-                scroll: false
-			   });
-			   //TODO: в dragStop добавить изменение местоположения игрока
+	var getGrid = function (){
+		if ($('#grid-on-off').attr("checked") != "checked") {
+				var gridXY = new Array(1,1);
+			}
+		else{
+				var gridXY = new Array(24,32);
+			}
+		return gridXY;
 	}
 	
     $(document).ready(init);
