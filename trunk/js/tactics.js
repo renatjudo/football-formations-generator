@@ -31,16 +31,6 @@
             grid: [gridXY[0], gridXY[1]],
 			});
         });
-		/*
-	  	$('.text-fields').on('keydown', '.text-number', function () {
-		alert("ПАНИКА!");
-		});
-		*/
-		/*
-		$('.text-number').live('keydown',  function () {
-		alert("ПАНИКА!");
-		});
-		*/		
 	};
 
     var createPlayer = function (x, y, gridXY, number, name) {
@@ -102,12 +92,31 @@
         var textAreaDiv = $('<div class="text-fields" id="' + number + '"></div>').appendTo($('.tactics-player-list'));
         $('<input type="text" id="number-for-player-' + number + '" class="text-number" maxlength="2" value="' + number + '" />').
             appendTo(textAreaDiv).
-            on('keyup', function () {
-                var value = parseInt($(this).val());
-                //TODO: преобразовать в число
-                playerVM.player.number = value;
-                $(playerVM.fieldView.numberDiv).text(value);
-            });
+            on({
+				keyup: function() {
+					var value = $(this).val();
+					//TODO: преобразовать в число
+					playerVM.player.number = value;
+					$(playerVM.fieldView.numberDiv).text(value);
+				},
+				keydown: function(event) {
+					// Разрешаем: backspace, delete, tab и escape
+					if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 ||
+					// Разрешаем: Ctrl+A, Ctrl+R
+					((event.keyCode == 65 || event.keyCode == 82) && event.ctrlKey === true) ||
+					// Разрешаем: home, end, влево, вправо
+					(event.keyCode >= 35 && event.keyCode <= 39)) {
+						// Ничего не делаем
+						return;
+					}
+					else {
+						if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+							event.preventDefault();
+						}  
+					}
+				}
+			});
+			
         $('<input type="text" id="lastname-for-player-' + number + '" class="text-lastname" value=""/>').
             appendTo(textAreaDiv).
             on('keyup', function () {
