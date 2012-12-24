@@ -23,6 +23,7 @@
         //TODO: убрать после отладки
         $('#debug-show-data').button().click(function () {
             $('#debug-data').html(JSON.stringify(model));
+			$('#json').val(JSON.stringify(model));
         });
 		
 		$('#grid-on-off').click(function () {
