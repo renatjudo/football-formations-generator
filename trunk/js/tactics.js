@@ -13,6 +13,8 @@
 	
     var init = function () {
 		$('#grid-on-off').attr("checked","checked");
+		$('select option:first').attr('selected',true);
+	
         $('#add-player').button().click(function () {
             if (counter > 11)
                 return;
@@ -23,7 +25,6 @@
         //TODO: убрать после отладки
         $('#debug-show-data').button().click(function () {
             $('#debug-data').html(JSON.stringify(model));
-			$('#json').val(JSON.stringify(model));
         });
 		
 		$('#grid-on-off').click(function () {
@@ -32,6 +33,23 @@
             grid: [gridXY[0], gridXY[1]],
 			});
         });
+		$('#formations').change(function() {
+			clearField();
+			model = {players: []};
+			var id=$("#formations :selected").val();
+			//Здесь мы должны обновлять json-модель, взятую из базы через аякс. 
+			$.getJSON("sql-formations.php",
+			  {
+				id: id
+			  },
+			  function(data) {
+				var obj=data;
+				gridXY=getGrid();
+				for each (var player in obj.players){
+				createPlayer (player.x, player.y, gridXY, player.number, player.name);
+				}
+			  });
+		});
 	};
 
     var createPlayer = function (x, y, gridXY, number, name) {
@@ -51,7 +69,7 @@
 
         createPlayerFieldView(playerVM, x, y, gridXY, number, name);
 
-        createTextField(counter, playerVM);
+        createTextField(number, playerVM);
         counter++;
     };
 
@@ -75,8 +93,9 @@
                 grid: [gridXY[0], gridXY[1]],
                 scroll: false,
 				stop: function (){
-				playerVM.player.x=$(this).css('left');
-				playerVM.player.y=$(this).css('top');
+					playerVM.player.x=$(this).css('left');
+					playerVM.player.y=$(this).css('top');
+					$('.json').val(JSON.stringify(model));
 				}
             });
 
@@ -115,6 +134,7 @@
 							event.preventDefault();
 						}  
 					}
+					$('.json').val(JSON.stringify(model));
 				}
 			});
 			
@@ -124,6 +144,7 @@
                 var value = $(this).val();
                 playerVM.player.name = value;
                 $(playerVM.fieldView.nameDiv).text(value);
+				$('.json').val(JSON.stringify(model));
             });
     };
 
@@ -137,6 +158,10 @@
 		return gridXY;
 	}
 	
+	var clearField = function (){
+		$(".tactics-field-player").remove();
+		$(".text-fields").remove();
+	}
     $(document).ready(init);
 
 })(jQuery);
