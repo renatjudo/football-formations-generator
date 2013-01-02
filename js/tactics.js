@@ -43,11 +43,11 @@
 				id: id
 			  },
 			  function(data) {
-				var obj=data;
-				gridXY=getGrid();
-				for each (var player in obj.players){
-				createPlayer (player.x, player.y, gridXY, player.number, player.name);
-				}
+				var obj=data.players;
+				var gridXY=getGrid();
+				$.each(obj, function(){
+					createPlayer (this.x, this.y, gridXY, this.number, this.name);
+				});
 			  });
 		});
 	};
