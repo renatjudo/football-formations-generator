@@ -7,7 +7,7 @@ include("mysql.php");
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>Генератор тактических схем</title>
 
-    <link href="css/jquery-ui-1.9.2.custom.min.css" type="text/css" rel="stylesheet" />
+    <link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" />
     <link href="css/tactics.css" type="text/css" rel="stylesheet" />
 
     <style type="text/css">
@@ -71,9 +71,8 @@ include("mysql.php");
 			<input type="submit" class="tactics-button" id="get-image" value="сделать картинку" />
 		</form>
 </div>
-
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="js/tactics.js"></script>
 </body>
 </html>
