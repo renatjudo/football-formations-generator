@@ -1,5 +1,4 @@
 (function ($) {
-
 	var gridXY = new Array (24,32);
     var counter = 1;
     var model = {
@@ -109,7 +108,7 @@
 
     var createTextField = function (number, playerVM) {
 
-        var textAreaDiv = $('<div class="text-fields" id="' + number + '"></div>').appendTo($('.tactics-player-list'));
+        var textAreaDiv = $('<div class="text-fields autocomplete" id="' + number + '"></div>').appendTo($('.tactics-player-list'));
         $('<input type="text" id="number-for-player-' + number + '" class="text-number" maxlength="2" value="' + number + '" />').
             appendTo(textAreaDiv).
             on({
@@ -145,7 +144,27 @@
                 playerVM.player.name = value;
                 $(playerVM.fieldView.nameDiv).text(value);
 				$('.json').val(JSON.stringify(model));
-            });
+            }).autocomplete({
+				source: "autocomplete.php", // url-адрес
+				minLength: 2, // минимальное количество для совершения запроса
+				select: function( event, ui ) {
+					$(this).val( ui.item.nick );
+					$('#number-for-player-'+number).val(ui.item.number);
+					playerVM.player.name = ui.item.nick;
+					playerVM.player.number = ui.item.number;
+					$(playerVM.fieldView.nameDiv).text(ui.item.nick);
+					$(playerVM.fieldView.numberDiv).text(ui.item.number);
+					$('.json').val(JSON.stringify(model));
+					return false;
+            }
+			})
+			.data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a><img src="+item.foto+" align='left' class='player-foto'><p class='autocomplete-first'>№"+item.number+" "+ item.nick + "</p><p class='autocomplete-second'>" + item.name + "</p> <p class='autocomplete-third'>" + item.position + "  " +item.birthday+ "</p></a>" )
+                .appendTo( ul );
+        };;
+			
     };
 
 	var getGrid = function (){
@@ -162,6 +181,8 @@
 		$(".tactics-field-player").remove();
 		$(".text-fields").remove();
 	}
+	
+	
     $(document).ready(init);
 
 })(jQuery);
